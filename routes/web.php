@@ -17,6 +17,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::prefix('students')->group(function () {
+    Route::get('/{id}/{age}', function ($id, $age) {
+        dd($id . '-' . $age);
+    });
+});
+
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return Inertia\Inertia::render('Dashboard');
 })->name('dashboard');
