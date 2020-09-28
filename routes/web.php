@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\DB;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,8 +19,11 @@ Route::get('/', function () {
 });
 
 Route::prefix('students')->group(function () {
-    Route::get('/{id}/{age}', function ($id, $age) {
-        dd($id . '-' . $age);
+    Route::get('/', function () {
+        $students =  DB::table('students')->get();
+        return view('students.detail', [
+            'students' => $students
+        ]);
     });
 });
 
