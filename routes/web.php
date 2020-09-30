@@ -1,7 +1,10 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\StudentController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,15 +21,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::prefix('students')->group(function () {
-    Route::get('/', function () {
-        $students =  DB::table('students')->get();
-        return view('students.detail', [
-            'students' => $students
-        ]);
-    });
+Route::prefix('auth')->group(function () {
+    Route::get('/login', [AuthController::class, 'index'])->name('getLogin');
+    Route::post('/post-login', [AuthController::class, 'postLogin'])->name('postLogin');
 });
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return Inertia\Inertia::render('Dashboard');
-})->name('dashboard');
+Route::prefix('students')->group(function () {
+    Route::get('/', [StudentController::class, 'index'])->name('listStudent');
+});

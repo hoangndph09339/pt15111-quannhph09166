@@ -1,48 +1,34 @@
-<x-guest-layout>
-    <x-jet-authentication-card>
-        <x-slot name="logo">
-            <x-jet-authentication-card-logo />
-        </x-slot>
+<!DOCTYPE html>
+<html lang="en">
 
-        <x-jet-validation-errors class="mb-4" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
 
-        @if (session('status'))
-            <div class="mb-4 font-medium text-sm text-green-600">
-                {{ session('status') }}
-            </div>
-        @endif
-
-        <form method="POST" action="{{ route('login') }}">
+<body>
+    <div class="container">
+        <form action="{{route('postLogin')}}" method="post">
             @csrf
-
-            <div>
-                <x-jet-label value="{{ __('Email') }}" />
-                <x-jet-input class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
-            </div>
-
-            <div class="mt-4">
-                <x-jet-label value="{{ __('Password') }}" />
-                <x-jet-input class="block mt-1 w-full" type="password" name="password" required autocomplete="current-password" />
-            </div>
-
-            <div class="block mt-4">
-                <label class="flex items-center">
-                    <input type="checkbox" class="form-checkbox" name="remember">
-                    <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
-                </label>
-            </div>
-
-            <div class="flex items-center justify-end mt-4">
-                @if (Route::has('password.request'))
-                    <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
-                        {{ __('Forgot your password?') }}
-                    </a>
-                @endif
-
-                <x-jet-button class="ml-4">
-                    {{ __('Login') }}
-                </x-jet-button>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="">User name</label>
+                        <input type="text" name="username" class="form-control" id="" placeholder="User Name">
+                    </div>
+                    <div class="form-group">
+                        <label for="">Password</label>
+                        <input type="password" name="password" class="form-control" id="" placeholder="Password">
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-outline-primary">Submit</button>
+                    </div>
+                </div>
             </div>
         </form>
-    </x-jet-authentication-card>
-</x-guest-layout>
+    </div>
+</body>
+
+</html>
