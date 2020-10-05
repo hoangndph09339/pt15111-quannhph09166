@@ -29,3 +29,7 @@ Route::prefix('auth')->group(function () {
 Route::prefix('students')->group(function () {
     Route::get('/', [StudentController::class, 'index'])->name('listStudent');
 });
+
+Route::get('/theme', function() {
+    return view('admin.dashboard.index');
+});
