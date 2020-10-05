@@ -26,8 +26,14 @@ Route::prefix('auth')->group(function () {
     Route::post('/post-login', [AuthController::class, 'postLogin'])->name('postLogin');
 });
 
-Route::prefix('students')->group(function () {
-    Route::get('/', [StudentController::class, 'index'])->name('listStudent');
+Route::prefix('admin')->group(function () {
+    Route::get('/dashboard', function() {
+        return 'DashBoard';
+    });
+
+    Route::prefix('students')->group(function () {
+        Route::get('/', [StudentController::class, 'show'])->name('listStudent');
+    });
 });
 
 Route::get('/theme', function() {

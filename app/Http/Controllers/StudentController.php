@@ -7,11 +7,11 @@ use Illuminate\Support\Facades\DB;
 
 class StudentController extends Controller
 {
-    public function index()
+    public function show()
     {
         $students = DB::table('students')->get();
 
-        return view('students.detail', [
+        return view('admin.students.index', [
             'students' => $students
         ]);
     }
